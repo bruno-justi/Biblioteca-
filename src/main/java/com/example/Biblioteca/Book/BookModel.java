@@ -1,6 +1,6 @@
 package com.example.Biblioteca.Book;
 
-import com.example.Biblioteca.Usuarios.LivrosModel;
+import com.example.Biblioteca.Usuarios.UsuarioModel;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 //Entity transforma uma classe em uma entidade do Banco de dados.
 @Entity
 //Table Cria uma tabela com as colunas(Definindo o nome da tabela inteira!)
-@Table(name = "tb_cadastro")
+@Table(name = "tb_livros")
 public class BookModel {
 
         //Definindo o ID com a annotation
@@ -20,7 +20,10 @@ public class BookModel {
         private String nome;
         private String autor;
         private int anoPublicacao;
-        private List<LivrosModel> livros; //falta criar a classe!!!!
+
+        //@OneToMany Um tipo de Livro pode ser usado por varios usuários.
+        @OneToMany(mappedBy = "books")
+        private List<UsuarioModel> usuario;
 
     public BookModel() {
     }

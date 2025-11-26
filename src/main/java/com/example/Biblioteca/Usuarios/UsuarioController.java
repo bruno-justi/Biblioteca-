@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping
-public class LivrosController {
+public class UsuarioController {
 
         @GetMapping("/usuario")
         public String usuario(){
