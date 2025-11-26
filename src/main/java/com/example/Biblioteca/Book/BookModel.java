@@ -2,14 +2,18 @@ package com.example.Biblioteca.Book;
 
 import com.example.Biblioteca.Usuarios.UsuarioModel;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 //JPA = Java persistence API
-//Entity transforma uma classe em uma entidade do Banco de dados.
-@Entity
-//Table Cria uma tabela com as colunas(Definindo o nome da tabela inteira!)
-@Table(name = "tb_livros")
+@Entity //Entity transforma uma classe em uma entidade do Banco de dados.
+@Table(name = "tb_livros") //Table Cria uma tabela com as colunas(Definindo o nome da tabela inteira!)
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class BookModel {
 
         //Definindo o ID com a annotation
@@ -24,46 +28,4 @@ public class BookModel {
         //@OneToMany Um tipo de Livro pode ser usado por varios usuários.
         @OneToMany(mappedBy = "books")
         private List<UsuarioModel> usuario;
-
-    public BookModel() {
-    }
-
-    public BookModel(Long id, String nome, String autor, int anoPublicacao) {
-        this.id = id;
-        this.nome = nome;
-        this.autor = autor;
-        this.anoPublicacao = anoPublicacao;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
-
-    public int getAnoPublicacao() {
-        return anoPublicacao;
-    }
-
-    public void setAnoPublicacao(int anoPublicacao) {
-        this.anoPublicacao = anoPublicacao;
-    }
 }
