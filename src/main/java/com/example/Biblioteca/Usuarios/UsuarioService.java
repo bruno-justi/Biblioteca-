@@ -35,4 +35,13 @@ public class UsuarioService {
     public void deletarUsuarioPorId(Long id) {
          usuarioRepository.deleteById(id);
     }
+
+    // Atualizar usuário
+    public UsuarioModel atualizarUsuario(Long id,  UsuarioModel usuarioAtualizado) {
+        if (usuarioRepository.existsById(id)) {
+            usuarioAtualizado.setId(id);
+            return usuarioRepository.save(usuarioAtualizado);
+        }
+            return null;
+    }
 }

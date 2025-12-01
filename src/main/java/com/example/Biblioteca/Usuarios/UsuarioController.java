@@ -34,9 +34,9 @@ public class UsuarioController {
         }
 
         //Alterar dados dos usuarios (UPDATE)
-        @PutMapping("/alterarId")
-        public String alterarUsuario() {
-            return "Alterar Ninja por ID";
+        @PutMapping("/atualizar/{id}")
+        public UsuarioModel atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioModel usuarioAtualizado) {
+            return usuarioService.atualizarUsuario(id, usuarioAtualizado);
         }
 
         //Deletar usuário (DELETE)
