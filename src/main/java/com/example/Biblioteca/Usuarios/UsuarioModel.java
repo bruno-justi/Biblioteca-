@@ -35,7 +35,7 @@ public class UsuarioModel {
     @Column(unique = true)
     private String email;
 
-    @Column(name = "CPF", length = 11, unique = true)
+    @Column(name = "CPF", length = 11, unique = true, nullable = false)
     private String cpf;
 
     //@ManyToOne Um usuário terá direito a pegar apenas um livro por vez!
