@@ -23,12 +23,16 @@ public class BookModel {
         @Id
         //Passando a estrategia de definir a sequencia dos ID's
         @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "id")
         private Long id;
 
+        @Column(name = "nome")
         private String nome;
 
+        @Column(name = "autor")
         private String autor;
 
+        @Column(name = "anoPublicacao")
         private int anoPublicacao;
 
         //@OneToMany Um tipo de Livro pode ser usado por varios usuários.
