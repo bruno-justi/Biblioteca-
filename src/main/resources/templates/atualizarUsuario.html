@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Atualizar Usuário</title>
+    <link rel="stylesheet" href="/templates/style.css">
+</head>
+<body>
+
+<h1>Atualizar Usuário</h1>
+
+<label>Nome:</label><br>
+<input id="nome" type="text"><br>
+
+<label>Email:</label><br>
+<input id="email" type="email"><br>
+
+<button onclick="atualizar()">Salvar Alterações</button>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    fetch(`http://localhost:8080/usuarios/buscar/${id}`)
+        .then(r => r.json())
+        .then(user => {
+            document.getElementById("nome").value = user.nome;
+            document.getElementById("email").value = user.email;
+        });
+
+    function atualizar() {
+        const dados = {
+            nome: document.getElementById("nome").value,
+            email: document.getElementById("email").value
+        };
+
+        fetch(`http://localhost:8080/usuarios/atualizar/${id}`, {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(dados)
+        })
+            .then(() => {
+                alert("Usuário atualizado com sucesso!");
+                window.location.href = "listarUsuarios.html";
+            });
+    }
+</script>
+
+</body>
+</html>

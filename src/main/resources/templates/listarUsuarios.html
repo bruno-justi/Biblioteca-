@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Usuários</title>
+    <link rel="stylesheet" href="/templates/style.css">
+</head>
+<body>
+
+<h1>Usuários cadastrados</h1>
+
+<button onclick="window.location.href='criarUsuario.html'">Criar novo usuário</button>
+
+<table id="tabelaUsuarios">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script>
+    fetch("http://localhost:8080/usuarios/listar")
+        .then(response => response.json())
+        .then(dados => {
+            let tabela = document.querySelector("#tabelaUsuarios tbody");
+            tabela.innerHTML = "";
+
+            dados.forEach(user => {
+                tabela.innerHTML += `
+                    <tr>
+                        <td>${user.id}</td>
+                        <td>${user.nome}</td>
+                        <td>${user.email}</td>
+                        <td>
+                            <button onclick="editar(${user.id})">Editar</button>
+                            <button onclick="deletar(${user.id})" style="background:red">Excluir</button>
+                        </td>
+                    </tr>`;
+            });
+        });
+
+    function editar(id) {
+        window.location.href = "atualizarUsuario.html?id=" + id;
+    }
+
+    function deletar(id) {
+        fetch(`http://localhost:8080/usuarios/deletar/${id}`, {
+            method: "DELETE"
+        }).then(() => {
+            alert("Usuário deletado!");
+            location.reload();
+        });
+    }
+</script>
+
+</body>
+</html>
