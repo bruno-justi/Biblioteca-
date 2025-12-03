@@ -6,12 +6,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
 //JPA = Java persistence API
 @Entity //Entity transforma uma classe em uma entidade do Banco de dados.
 @Table(name = "tb_livros") //Table Cria uma tabela com as colunas(Definindo o nome da tabela inteira!)
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
