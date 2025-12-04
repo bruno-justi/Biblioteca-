@@ -26,22 +26,28 @@ public class BookService {
     }
 
     // Listar os livros por Id
-    public BookDTO listarBooksPorId(Long id) {
+    public BookDTO listarLivrosPorId(Long id) {
         Optional<BookModel> bookPorId = bookRepository.findById(id);
         return bookPorId.map(bookMapper::mapD).orElse(null);
     }
 
     // Adicionar um livro na biblioteca
     public BookDTO adicionarLivro(BookDTO bookDTO) {
-        BookModel book =  bookMapper.mapE(bookDTO);
+        BookModel book = bookMapper.mapE(bookDTO);
         book = bookRepository.save(book);
         return bookMapper.mapD(book);
     }
 
-    // Deletar algum livro que não exista mais na biblioteca
-    public void deletarBookPorId(Long id) {
+    // Deletar um livro da biblioteca por ID
+    public void deletarLivroPorId(Long id) {
         bookRepository.deleteById(id);
     }
-
-    // Disponibilidade do livro
 }
+
+
+    // 1. Buscar o Livro pelo ID no repositório.
+    // 2. Se não existir, lançar exceção (Livro não encontrado).
+    // 3. Verificar a quantidadeDisponivel ou o campo disponivel.
+    // 4. Retornar true ou false.
+    // Disponibilidade do livro
+

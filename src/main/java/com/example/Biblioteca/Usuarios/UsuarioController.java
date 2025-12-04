@@ -61,7 +61,7 @@ public class UsuarioController {
     public ResponseEntity<String> deletarUsuarioPorId(@PathVariable Long id) {
         if (usuarioService.listarUsuarioPorId(id) != null) {
             usuarioService.deletarUsuarioPorId(id);
-            return ResponseEntity.ok("Usuário deletado com sucesso!" + id + "Deletado com sucesso!");
+            return ResponseEntity.ok("Usuário com ID: "+ id + " deletado com sucesso.");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Usuário com o (ID) " + id + " não foi encontrado.");

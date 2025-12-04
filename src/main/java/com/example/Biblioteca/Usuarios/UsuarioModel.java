@@ -1,6 +1,7 @@
 package com.example.Biblioteca.Usuarios;
 
 import com.example.Biblioteca.Book.BookModel;
+import com.example.Biblioteca.Loan.LoanModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,9 +41,7 @@ public class UsuarioModel {
     @Column(name = "CPF", length = 11, unique = true, nullable = false)
     private String cpf;
 
-    //@ManyToOne Um usuário terá direito a pegar apenas um livro por vez!
     @ManyToOne
-    @JoinColumn(name = "books_id") //Foreing Key ou Chave estrangeira.
+    @JoinColumn(name="missoes_id")//Foreina Key ou Chave Estrangeira
     private BookModel books;
-
 }
