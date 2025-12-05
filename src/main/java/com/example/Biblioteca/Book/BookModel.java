@@ -35,8 +35,4 @@ public class BookModel {
         @Column(name = "anoPublicacao")
         private int anoPublicacao;
 
-        //@OneToMany Um tipo de Livro pode ser usado por varios usuários.
-        @OneToMany(mappedBy = "books")
-        @JsonIgnore
-        private List<UsuarioModel> usuario;
 }

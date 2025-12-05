@@ -21,7 +21,7 @@ public class UsuarioService {
     public List<UsuarioDTO> listarUsuarios() {
         List<UsuarioModel> usuarios = usuarioRepository.findAll();
         return usuarios.stream()
-                .map(usuarioMapper::mapDTO       )
+                .map(usuarioMapper::mapDTO)
                 .collect(Collectors.toList());
     }
 

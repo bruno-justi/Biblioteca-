@@ -22,13 +22,14 @@ public class LoanModel {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "book_id")
-    private String book;
+    @ManyToOne
+    @JoinColumn(name = "book_id", nullable = false)
+    private BookModel book;
 
-    @Column(name = "usuario", nullable = false)
-    private String usuario;
+    @Column(name = "status")
+    private String status;
 
-    @Column(name = "data_emprestimo")
+    @Column(name = "data_emprestimo", nullable = false)
     private LocalDateTime loanDate;
 
     @Column(name = "data_devolucao")
@@ -38,7 +39,8 @@ public class LoanModel {
     * 1 empréstimo → pertence a 1 usuário
       1 usuário -> pode ter vários empréstimos
     */
+
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false) //Foreing Key ou Chave estrangeira.
+    @JoinColumn(name = "usuario_id", nullable = false)
     private UsuarioModel usuarioModel;
 }

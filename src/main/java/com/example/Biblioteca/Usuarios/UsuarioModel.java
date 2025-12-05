@@ -11,7 +11,7 @@ import lombok.ToString;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_usuarios ")
+@Table(name = "tb_usuarios")
 
 //Trabalhando com Lombok, tirando o gasto de ficar fazendo overload.
 @NoArgsConstructor
@@ -41,7 +41,7 @@ public class UsuarioModel {
     @Column(name = "CPF", length = 11, unique = true, nullable = false)
     private String cpf;
 
-    @ManyToOne
-    @JoinColumn(name="missoes_id")//Foreina Key ou Chave Estrangeira
-    private BookModel books;
+    // RELAÇÃO CORRETA: 1 usuário -> vários empréstimos
+    @OneToMany(mappedBy = "usuarioModel")
+    private List<LoanModel> loans;
 }

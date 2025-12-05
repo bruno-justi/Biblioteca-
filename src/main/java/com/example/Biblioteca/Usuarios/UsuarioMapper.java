@@ -1,37 +1,35 @@
 package com.example.Biblioteca.Usuarios;
 
+import com.example.Biblioteca.Loan.LoanMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
 
 @Component
 public class UsuarioMapper {
 
-    // Mapeamento de uma entity para um DTO
+    public UsuarioDTO mapDTO(UsuarioModel usuarioModel) {
+        UsuarioDTO dto = new UsuarioDTO();
+        dto.setId(usuarioModel.getId());
+        dto.setNome(usuarioModel.getNome());
+        dto.setImgUrl(usuarioModel.getImgUrl());
+        dto.setIdade(usuarioModel.getIdade());
+        dto.setEmail(usuarioModel.getEmail());
+        dto.setCpf(usuarioModel.getCpf());
+
+        // loans virão aqui depois
+        return dto;
+    }
 
     public UsuarioModel mapEntity(UsuarioDTO usuarioDTO) {
         UsuarioModel usuarioModel = new UsuarioModel();
         usuarioModel.setId(usuarioDTO.getId());
         usuarioModel.setNome(usuarioDTO.getNome());
+        usuarioModel.setImgUrl(usuarioDTO.getImgUrl());
+        usuarioModel.setIdade(usuarioDTO.getIdade());
         usuarioModel.setEmail(usuarioDTO.getEmail());
         usuarioModel.setCpf(usuarioDTO.getCpf());
-        usuarioModel.setIdade(usuarioDTO.getIdade());
-        usuarioModel.setImgUrl(usuarioDTO.getImgUrl());
-        usuarioModel.setBooks(usuarioDTO.getBooks());
-
         return usuarioModel;
-    }
-
-    // Mapeamento de um DTO para uma entity
-
-    public UsuarioDTO mapDTO(UsuarioModel usuarioModel) {
-        UsuarioDTO usuarioDTO = new UsuarioDTO();
-        usuarioDTO.setId(usuarioModel.getId());
-        usuarioDTO.setNome(usuarioModel.getNome());
-        usuarioDTO.setEmail(usuarioModel.getEmail());
-        usuarioDTO.setCpf(usuarioModel.getCpf());
-        usuarioDTO.setIdade(usuarioModel.getIdade());
-        usuarioDTO.setImgUrl(usuarioModel.getImgUrl());
-        usuarioDTO.setBooks(usuarioModel.getBooks());
-
-        return usuarioDTO;
     }
 }

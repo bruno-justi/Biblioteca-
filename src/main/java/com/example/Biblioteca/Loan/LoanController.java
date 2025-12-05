@@ -1,7 +1,9 @@
-/*package com.example.Biblioteca.Loan;
+package com.example.Biblioteca.Loan;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/loans")
@@ -14,34 +16,47 @@ public class LoanController {
     }
 
     // Deve retornar apenas livros que NÃO possuem Loan ativo.
-    @GetMapping("/livros_disponiveis")
-    public String listarLivrosDisponiveis() {
-        return "Lista de livros disponíveis para empréstimo.";
+    @GetMapping("/situacao")
+    public ResponseEntity<List<LoanDTO>> listarLoans() {
+        List<LoanDTO> loans = loanService.listarLoans();
+        return ResponseEntity.ok(loans);
     }
 
 
-    *//*verificar se o livro existe
+    /*verificar se o livro existe
     verificar se o usuário existe
     verificar se NÃO tem um empréstimo ativo
-    criar um Loan com status ACTIVE
-
-    @PostMapping("/loan/{bookId}")
-    public ResponseEntity<String> Book(@PathVariable Long bookId) {
-
+    cria um Loan com status ACTIVE
+     */
+    @PostMapping("/criar")
+    public ResponseEntity<?> criarLoan(@RequestBody LoanDTO loanDTO) {
+        try {
+            LoanDTO criarLoan = loanService.criarLoan(loanDTO);
+            return ResponseEntity.ok(criarLoan);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
+    // Devolver emprestimo do livro
+    @PutMapping("/devolver/{id}")
+    public ResponseEntity<?> devolverLoan(@PathVariable Long id) {
+        try {
+            LoanDTO devolvido = loanService.devolverLivro(id);
+            return ResponseEntity.ok(devolvido);
+        } catch (RuntimeException e) {
+            return  ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
-    /*localizar Loan ativo
-    mudar status para RETURNED
-    adicionar endDate
-    *//*
-    @PostMapping("/loan/return/{bookId}")
+      /*verificar se o livro existe
+    verificar se o usuário existe
+    verificar se NÃO tem um empréstimo ativo
+    */
+}
 
 
-    *//*
-    todos os empréstimos do usuário
-    inclusive ativos e devolvidos
-    *//*
-    @GetMapping("/loans/usuarios/{userId}")
-}*/
+
+
+
 
