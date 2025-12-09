@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,6 +30,11 @@ public class LoanService {
         return loans.stream()
                 .map(loanMapper::mapDTO)
                 .collect(Collectors.toList());
+    }
+
+    public LoanDTO listarLoansPorId(Long id) {
+        Optional<LoanModel> loanPorId = loanRepository.findById(id);
+        return loanPorId.map(loanMapper::mapDTO).orElse(null);
     }
 
     public LoanDTO criarLoan(LoanDTO dto) {

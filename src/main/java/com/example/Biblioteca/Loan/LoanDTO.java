@@ -17,4 +17,5 @@ public class LoanDTO {
         private String status;
         private Long userId;
         private Long bookId;
+
 }

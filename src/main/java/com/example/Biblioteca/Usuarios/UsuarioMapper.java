@@ -25,7 +25,10 @@ public class UsuarioMapper {
                             .map(loan ->
                                     new UsuarioDTO.LoanInfo(
                                             loan.getId(),              // ← ID DO LOAN
-                                            loan.getBook().getId()     // ← ID DO LIVRO
+                                            loan.getBook().getId(),     // ← ID DO LIVRO
+                                            loan.getStatus(),            // ← STATUS DO LOAN
+                                            loan.getLoanDate().toString(), // ← DATA DE EMPRÉSTIMO
+                                            loan.getReturnDate() != null ? loan.getReturnDate().toString() : null
                                     )
                             )
                             .collect(Collectors.toList())

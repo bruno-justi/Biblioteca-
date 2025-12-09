@@ -1,5 +1,6 @@
 package com.example.Biblioteca.Loan;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,11 +16,23 @@ public class LoanController {
         this.loanService = loanService;
     }
 
-    // Deve retornar apenas livros que NÃO possuem Loan ativo.
+    // Retorna todos os empréstimos e suas situações
     @GetMapping("/situacao")
     public ResponseEntity<List<LoanDTO>> listarLoans() {
         List<LoanDTO> loans = loanService.listarLoans();
         return ResponseEntity.ok(loans);
+    }
+
+    // Retorna os empréstimos por um ID de empréstimo específico
+    @GetMapping("/situacao/{id}")
+    public ResponseEntity<?> listarLoansPorId(@PathVariable Long id) {
+        LoanDTO loan = loanService.listarLoansPorId(id);
+        if (loan != null) {
+            return ResponseEntity.ok(loan);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Empréstimo com o (ID) " + id + " não foi encontrado.");
+        }
     }
 
 

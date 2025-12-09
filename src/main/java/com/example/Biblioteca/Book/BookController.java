@@ -39,7 +39,7 @@ public class BookController {
     }
 
     // POST -- Mandar uma requisição para adicionar livro
-    @PostMapping("/criar")
+      @PostMapping("/criar")
     public ResponseEntity<String> criarLivro(@RequestBody BookDTO book) {
         BookDTO novoBook = bookService.adicionarLivro(book);
         return ResponseEntity.status(HttpStatus.CREATED)

@@ -35,6 +35,7 @@ public class LoanModel {
     @Column(name = "data_devolucao")
     private LocalDateTime returnDate;
 
+
     /*
     * 1 empréstimo → pertence a 1 usuário
       1 usuário -> pode ter vários empréstimos
