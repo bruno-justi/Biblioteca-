@@ -1,0 +1,46 @@
+package com.example.Biblioteca.Usuarios.model;
+
+import com.example.Biblioteca.Loan.model.LoanModel;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import java.util.List;
+
+@Entity
+@Table(name = "tb_usuarios")
+
+//Trabalhando com Lombok, tirando o gasto de ficar fazendo overload.
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = "books")
+
+@Data //Cria todos os getters e setters.
+public class UsuarioModel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "name")
+    private String nome;
+
+    @Column(name = "img_url")
+    private String imgUrl;
+
+    @Column(name = "idade")
+    private int idade;
+
+    @Column(unique = true)
+    private String email;
+
+    @Column(name = "CPF", length = 11, unique = true, nullable = false)
+    private String cpf;
+
+    // RELAÇÃO CORRETA: 1 usuário -> vários empréstimos
+    @OneToMany(mappedBy = "usuarioModel", cascade = CascadeType.ALL)
+    private List<LoanModel> loans;
+}
